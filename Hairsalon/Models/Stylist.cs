@@ -1,4 +1,4 @@
-namespace Hairsalon.Models
+namespace HairSalon.Models
 
 {
 public class Stylists
