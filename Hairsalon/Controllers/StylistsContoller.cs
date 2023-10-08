@@ -18,7 +18,7 @@ namespace Hairsalon.Controllers
 
     public ActionResult Index()
     {
-      List<Stylists> model = _db.Stylists
+      List<Stylists> model = _db.Stylist
                             .Include(stylist => stylist.client)
                             .ToList();
       return View(model);
@@ -31,7 +31,7 @@ namespace Hairsalon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Stylists stylist)
+    public ActionResult Create(Stylist stylist)
     {
       if (stylist.ClientId == 0)
       {
@@ -44,7 +44,7 @@ namespace Hairsalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Stylist thisstylist = _db.stylists
+      Stylist thisstylist = _db.stylist
                           .Include(stylist => stylist.Client)
                           .FirstOrDefault(stylist => stylist.stylistsId == id);
       return View(thisStylist);

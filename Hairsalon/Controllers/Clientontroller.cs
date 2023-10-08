@@ -6,18 +6,18 @@ using System.Linq;
 
 namespace Hairsalon.Controllers
 {
-  public class ClientsController : Controller
+  public class ClientsControllers : Controller
   {
     private readonly HairsalonContext _db;
 
-    public ClientController(HairsalonContext db)
+    public ClientsControllers(HairsalonContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List< Client> model = _db. Client.ToList();
+      List<Clients> model = _db. Client.ToList();
       return View(model);
     }
 
@@ -27,7 +27,7 @@ namespace Hairsalon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create( Client  Client)
+    public ActionResult Create(Clients  Client)
     {
       _db. Client.Add( Client);
       _db.SaveChanges();
@@ -36,7 +36,7 @@ namespace Hairsalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Client this Client = _db. Client
+      Client thisClient = _db.Client
                                   .Include( Client => client.stylist)
                                   .FirstOrDefault(client => client.clientId == id);
       return View(thisClient);
@@ -49,7 +49,7 @@ namespace Hairsalon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Client client)
+    public ActionResult Edit(Clients client)
     {
       _db.Client.Update(client);
       _db.SaveChanges();
