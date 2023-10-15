@@ -18,7 +18,7 @@ namespace HairSalon.Controllers
 
     public ActionResult Index()
     {
-      List<Stylists> model = _db.Stylists
+      List<Stylist> model = _db.Stylists
                             .Include(stylist => stylist.Client)
                             .ToList();
       return View(model);
@@ -26,12 +26,12 @@ namespace HairSalon.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.ClientId = new SelectList(_db.Client, "ClientId", "Name");
+      ViewBag.ClientId = new SelectList(_db.Clients, "ClientId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Stylists stylist)
+    public ActionResult Create(Stylist stylist)
     {
       if (stylist.ClientId == 0)
       {
@@ -44,21 +44,21 @@ namespace HairSalon.Controllers
 
     public ActionResult Details(int id)
     {
-      Stylists thisStylist = _db.Stylists
+      Stylist thisStylist = _db.Stylists
                           .Include(stylist => stylist.Client)
-                          .FirstOrDefault(stylist => stylist.StylistsId == id);
+                          .FirstOrDefault(stylist => stylist.StylistId == id);
       return View(thisStylist);
     }
 
     public ActionResult Edit(int id)
     {
-      Stylists thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistsId == id);
-      ViewBag.ClientId = new SelectList(_db.Client, "ClientId", "Name");
+      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
+      ViewBag.ClientId = new SelectList(_db.Clients, "ClientId", "Name");
       return View(thisStylist);
     }
 
     [HttpPost]
-    public ActionResult Edit(Stylists stylist)
+    public ActionResult Edit(Stylist stylist)
     {
       _db.Stylists.Update(stylist);
       _db.SaveChanges();
@@ -67,14 +67,14 @@ namespace HairSalon.Controllers
 
     public ActionResult Delete(int id)
     {
-      Stylists thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistsId == id);
+      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
       return View(thisStylist);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Stylists thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistsId == id);
+      Stylist thisStylist = _db.Stylists.FirstOrDefault(stylist => stylist.StylistId == id);
       _db.Stylists.Remove(thisStylist);
       _db.SaveChanges();
       return RedirectToAction("Index");
