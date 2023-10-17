@@ -2,8 +2,6 @@
 
 @model HairSalon.Models.Stylist
 
-<p><strong>NOTE:</strong> You need to have at least one Client </p>
-<p>Go to @Html.ActionLink("this page", "Create", "Client") to make a Client.</p>
 
 <h4>Add a new Stylist</h4>
 
@@ -14,8 +12,7 @@
   @Html.LabelFor(model => model.Description)
   @Html.TextBoxFor(model => model.Description)
 
-  @Html.LabelFor(model => model.Client)
-  @Html.DropDownList("ClientId")
+  
 
   <input type="submit" value="Add new stylist" class="btn btn-primary" />
 }
